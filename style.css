@@ -1,0 +1,485 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Rubik', sans-serif;
+    list-style: none;
+    text-decoration: none;
+}
+
+:root {
+    --bg-color: white;
+    --text-color: black;
+    --main-color: darkred;
+
+    --big-font: 7rem;
+    --p-font: 1.1rem;
+    --max-width: 1200px;
+}
+
+body:has(#darkmode-toggle:checked) {
+    --bg-color: black;
+    --text-color: white;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background: var(--bg-color);
+  color: var(--text-color);
+  transition: background 0.3s, color 0.3s;
+}
+
+.toggle-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1001;
+}
+
+#darkmode-toggle {
+  display: none;
+}
+
+.toggle-label {
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #aaa0a0(59, 52, 52);
+  color: #333;
+  padding: 8px 16px;
+  border-radius: 25px;
+  font-weight: bold;
+  font-size: 1rem;
+  transition: background 0.3s, color 0.3s;
+  user-select: none;
+}
+
+.toggle-label .moon {
+    display: inline-block; 
+}
+.toggle-label .sun {
+    display: none; 
+}
+
+#darkmode-toggle:checked + .toggle-label .moon {
+    display: none; 
+}
+#darkmode-toggle:checked + .toggle-label .sun {
+    display: inline-block; 
+}
+
+body:has(#darkmode-toggle:checked) .toggle-label {
+  background: #444;
+  color: black;
+}
+
+body:has(#darkmode-toggle:checked) .two {
+    background: black;
+    color: white; 
+    border: 2px solid var(--main-color); 
+}
+
+.page-wrapper {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background 0.3s, color 0.3s;
+  min-height: 100vh;
+}
+
+nav{
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 35px 20%;
+    background: transparent;
+    transition: all ease .45s;
+}
+
+nav .logo a{
+    color: var(--text-color);
+    font-size: 41px;
+    font-weight: 600;
+}
+
+nav .logo span{
+    color: var(--main-color);
+}
+
+ul{
+    display: flex;
+}
+
+ul li a{
+    font-size: var(--p-font);
+    font-weight: 500;
+    color: var(--text-color);
+    margin: 0 25px;
+    transition: all ease .50s;
+}
+
+ul li a:hover{
+  background-color: var(--main-color);
+  color: white;
+}
+
+nav .checkbox{
+    display: none;
+}
+
+nav input{
+    display: none;
+}
+
+nav .checkbox i{
+    font-size: 1.5rem;
+    color: var(--text-color);
+    cursor: pointer;
+}
+
+section{
+    padding: 0 15%;
+}
+
+/* --home-- */
+.home{
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.home-img{
+    width: 700px;
+    height: 700px;
+}
+
+.home-img img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    animation: imgg 2s ease-in-out infinite;
+    animation-delay: 2s;
+}
+
+@keyframes imgg{
+    0%{ transform: translateY(0); }
+    50%{ transform: translateY(-22px); }
+    100%{ transform: translateY(0); }
+}
+
+.home-text span {
+    padding: 5px 25px;
+    background: linear-gradient(130.08deg, #181816 0%, #7a2727 100%);
+    box-shadow: 0px 20px 40px #00000070;
+    border: 1px solid #3b3b3b;
+    border-radius: 100px;
+    color: white; 
+    font-weight: 700;
+    font-size: 15px;
+    text-transform: uppercase;
+}
+
+.home-text h1{
+    font-size: 50px;
+    margin: 20px 0;
+}
+
+.home-text p{
+    font-size: var(--p-font);
+    font-weight: 400;
+    color: #666; 
+    line-height: 30px;
+    margin-bottom: 20px;
+}
+
+.home-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.main-btn {
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.btn{
+    display: inline-block;
+    padding: 14px 34px;
+    background: var(--main-color);
+    color: white;
+    border: 2px solid var(--main-color);
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 8px;
+    transition: all 0.6s ease-in-out;
+}
+
+.btn:hover{
+    transform: translate(-5px);
+    background: transparent;
+    color: var(--main-color);
+}
+
+.two{
+    background: white;
+    border: 2px solid var(--main-color);
+    color: var(--main-color);
+    margin-left: 25px;
+}
+
+.two:hover{
+    color:white;
+    background: var(--main-color);
+    border: 2px solid var(--main-color);
+}
+
+
+/* --about-- */
+#about{
+  padding: 88px 0;
+  color: var(--text-color);
+}
+
+.row{
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.about-col-1{
+  flex-basis: 30%;
+}
+
+.about-col-1 img{
+  width: 150%;
+  border-radius: 10px;
+  margin: 30px 0;
+}
+
+.about-col-2{
+  flex-basis: 50%;
+  margin: 50px 0;
+}
+
+.sub-title{
+  font-size: 60px;
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.social i {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 45px;
+    width: 45px;
+    background: linear-gradient(130.08deg, #383528 0%, darkred 100%);
+    box-shadow: 0px 20px 40px #00000070;
+    border: 1px solid #3b3b3b;
+    border-radius: 50%;
+    color: white; /* Always white */
+    font-size: 20px;
+    margin: 0 7px;
+    transition: all 0.6s ease-in-out;
+}
+
+.social i:hover{
+    transform: translate(-5px);
+}
+
+/*---skills---*/
+#skills{
+  padding: 88px 0;
+}
+
+.skill-img img{
+    width: 100%;
+    height: 100%;
+    animation: imgg 2s ease-in-out infinite;
+    animation-delay: 2s;
+}
+
+.skills-list{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-gap: 40px;
+  margin-top: 50px;
+}
+
+.skills-list div{
+  background: #f5f5f5; /* Light mode */
+  padding: 40px;
+  font-size: 13px;
+  font-weight: 300;
+  border-radius: 10px;
+  transition: background 0.5s, transform 0.5s;
+  color: var(--text-color);
+}
+
+.skills-list div h2{
+  font-size: 30px;
+  font-weight: 500;
+  margin-bottom: 15px;
+}
+
+.skills-list div p{
+  font-size: 15px;
+  font-weight: 400;
+}
+
+
+.skills-list div a{
+  text-decoration: none;
+  color: var(--text-color);
+  font-size: 15px;
+  margin-top: 20px;
+  display: inline-block;
+}
+
+.skills-list div h2,
+.skills-list div p, 
+.skills-list div a{
+    color: black; /* Always black regardless of dark or light mode */
+}
+
+.skills-list div:hover{
+  background: indianred;
+  transform: translateY(-10px);
+  color: white;
+}
+
+/*---contact--*/
+#contact{
+  padding: 88px 0;
+}
+
+.contact-left{
+  flex-basis: 35%;
+}
+
+.contact-right{
+  flex-basis: 60%;
+}
+
+.contact-left p{
+  margin-top: 20px;
+}
+
+.contact-left p i {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    width: 50px;
+    background: linear-gradient(130.08deg, #383528 0%, darkred 100%);
+    box-shadow: 0px 20px 40px #00000070;
+    border: 1px solid #3b3b3b;
+    border-radius: 50%;
+    color: white; /* Force always white */
+    font-size: 20px;
+    margin: 0 7px;
+    transition: all 0.6s ease-in-out;
+}
+
+.social-icons i {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 60px;
+    width: 60px;
+    background: linear-gradient(130.08deg, #383528 0%, darkred 100%);
+    box-shadow: 0px 20px 40px #00000070;
+    border: 1px solid #3b3b3b;
+    border-radius: 50%;
+    color: white; /* Always white */
+    font-size: 30px;
+    margin: 0 7px;
+    transition: all 0.6s ease-in-out;
+}
+
+.social-icons i:hover{
+    transform: translate(-5px);
+}
+
+.contact-right form{
+  width: 100%;
+}
+
+form input, form textarea{
+  width: 100%;
+  border: 0;
+  outline: none;
+  background: #f5f5f5;
+  padding: 15px;
+  margin: 15px 0;
+  color: var(--text-color);
+  font-size: 18px;
+  border-radius: 6px;
+}
+
+/* Default light mode */
+.copyright {
+    background: #333; 
+    color: white; 
+    text-align: center;
+    padding: 25px 0;
+    font-weight: 300;
+    margin-top: 20px;
+    transition: background 0.3s, color 0.3s;
+}
+
+.copyright i {
+    color: var(--main-color);
+}
+
+/* Optional: if you want a slightly different background in light mode */
+body:not(:has(#darkmode-toggle:checked)) .copyright {
+    background: #747373; 
+}
+
+
+
+/*---responsive---*/
+@media only screen and (max-width: 600px){
+  .sub-title{
+    font-size: 40px;
+  }
+  .about-col-1, .about-col-2{
+    flex-basis: 100%;
+  }
+  .about-col-1{
+   margin-bottom: 30px;
+ }
+  .about-col-2{
+    font-size: 14px; 
+  }
+  .contact-left, .contact-right{
+    flex-basis: 100%;
+  }
+  .copyright{
+    font-size: 14px;
+  }
+
+  /* Stack buttons on small screens */
+  .main-btn {
+    flex-direction: column;
+    width: 100%;
+  }
+  .main-btn .btn {
+    width: 100%;
+    text-align: center;
+  }
+}
