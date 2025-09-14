@@ -1,4 +1,4 @@
-*{
+* {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
@@ -17,77 +17,86 @@
     --max-width: 1200px;
 }
 
+/* ✅ Dark mode (when toggle is checked) */
 body:has(#darkmode-toggle:checked) {
     --bg-color: black;
     --text-color: white;
 }
 
+/* General body styling */
 body {
-  margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
-  background: var(--bg-color);
-  color: var(--text-color);
-  transition: background 0.3s, color 0.3s;
+    margin: 0;
+    padding: 0;
+    background: var(--bg-color);
+    color: var(--text-color);
+    transition: background 0.3s, color 0.3s;
 }
 
+/* Toggle button container */
 .toggle-container {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  z-index: 1001;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1001;
 }
 
 #darkmode-toggle {
-  display: none;
+    display: none;
 }
 
+/* Toggle label */
 .toggle-label {
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: #aaa0a0(59, 52, 52);
-  color: #333;
-  padding: 8px 16px;
-  border-radius: 25px;
-  font-weight: bold;
-  font-size: 1rem;
-  transition: background 0.3s, color 0.3s;
-  user-select: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #aaa; /* ✅ fixed invalid color */
+    color: #333;
+    padding: 8px 16px;
+    border-radius: 25px;
+    font-weight: bold;
+    font-size: 1rem;
+    transition: background 0.3s, color 0.3s;
+    user-select: none;
 }
 
+/* Icons inside the toggle */
 .toggle-label .moon {
-    display: inline-block; 
+    display: inline-block;
 }
 .toggle-label .sun {
-    display: none; 
+    display: none;
 }
 
+/* Switch moon/sun when checked */
 #darkmode-toggle:checked + .toggle-label .moon {
-    display: none; 
+    display: none;
 }
 #darkmode-toggle:checked + .toggle-label .sun {
-    display: inline-block; 
+    display: inline-block;
 }
 
+/* Dark mode toggle style */
 body:has(#darkmode-toggle:checked) .toggle-label {
-  background: #444;
-  color: black;
+    background: #444;
+    color: white;
 }
 
+/* Example: styling your second button differently in dark mode */
 body:has(#darkmode-toggle:checked) .two {
     background: black;
-    color: white; 
-    border: 2px solid var(--main-color); 
+    color: white;
+    border: 2px solid var(--main-color);
 }
 
+/* Page wrapper to apply theme */
 .page-wrapper {
-  background-color: var(--bg-color);
-  color: var(--text-color);
-  transition: background 0.3s, color 0.3s;
-  min-height: 100vh;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background 0.3s, color 0.3s;
+    min-height: 100vh;
 }
+
 
 nav{
     position: fixed;
@@ -271,7 +280,12 @@ section{
 
 .about-col-2{
   flex-basis: 50%;
-  margin: 50px 0;
+  mar
+  gin: 50px 0;
+}
+
+.about-col-2 p {
+  margin-bottom: 18px; /* Adjust this value for more or less space */
 }
 
 .sub-title{
@@ -341,12 +355,25 @@ section{
 }
 
 
-.skills-list div a{
-  text-decoration: none;
-  color: var(--text-color);
-  font-size: 15px;
-  margin-top: 20px;
+/* Style Learn More as a button with black border and center it */
+.skills-list div a {
   display: inline-block;
+  padding: 8px 22px;
+  border: 2px solid black;
+  border-radius: 6px;
+  background: transparent;
+  color: black;
+  font-size: 1rem;
+  font-weight: 500;
+  text-align: center;
+  margin: 12px auto 0 auto;
+  transition: background 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.skills-list div a:hover {
+  background: black;
+  color: white;
+  border-color: black;
 }
 
 .skills-list div h2,
@@ -450,7 +477,64 @@ body:not(:has(#darkmode-toggle:checked)) .copyright {
     background: #747373; 
 }
 
+  [contenteditable="true"] {
+  outline: 2px dashed darkred;
+  background: #f9f9f9;
+  padding: 5px;
+}
 
+#edit-btn {
+  padding: 6px 18px;
+  font-size: 0.9rem;
+  border-radius: 6px;
+  min-width: unset;
+}
+
+.skills-list .btn.two {
+  display: block;
+  margin: 12px auto;
+  padding: 6px 18px;
+  font-size: 0.9rem;
+  border-radius: 6px;
+  min-width: unset;
+  width: fit-content;
+  text-align: center;
+}
+
+.skill-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.skill-actions .btn.two,
+.skill-actions a {
+  margin: 0;
+  padding: 4px 12px;
+  font-size: 0.85rem;
+  border-radius: 6px;
+  min-width: unset;
+  width: fit-content;
+  text-align: center;
+}
+
+/* Style Learn More as a button with black border */
+.skill-actions a {
+  border: 2px solid black;
+  background: transparent;
+  color: black;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: background 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.skill-actions a:hover {
+  background: black;
+  color: white;
+  border-color: black;
+}
 
 /*---responsive---*/
 @media only screen and (max-width: 600px){
@@ -482,4 +566,6 @@ body:not(:has(#darkmode-toggle:checked)) .copyright {
     width: 100%;
     text-align: center;
   }
+
+
 }

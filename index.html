@@ -68,10 +68,13 @@
       <img src="about-img.jpg" alt="About Image">
     </div>
     <div class="about-col-2">
-     <h1 class="sub-title">About Me</h1>
-     <p style="text-align: justify;">Hi! I'm Jemarie Fernandez. I graduated with high honors from Senior High School at Bayugan National Comprehensive High School. I am currently a third-year college student pursuing a Bachelor of Science in Computer Science at Caraga State University – Main Campus in Ampayon, Butuan City. 
-      I enjoy playing sports, watching K-Dramas, and listening to music. I don’t particularly like studying, but I’ve managed to keep going until this year. xD<br><br>
-      Check out my:</p><br>
+  <h1 class="sub-title">About Me</h1>
+  <p id="about-text" contenteditable="false" style="text-align: justify;">
+    Hi! I'm Jemarie Fernandez. I graduated with high honors from Senior High School at Bayugan National Comprehensive High School. I am currently a third-year college student pursuing a Bachelor of Science in Computer Science at Caraga State University – Main Campus in Ampayon, Butuan City. 
+    I enjoy playing sports, watching K-Dramas, and listening to music. I don’t particularly like studying, but I’ve managed to keep going until this year. xD
+  </p>
+  <p><button id="edit-btn" class="btn two">Edit</button></p>
+  <p>Check out my:</p><br>
      <div class="social">
         <a href="https://www.facebook.com/itsjemariefernandez"><i class="fa-brands fa-facebook"></i></a>
         <a href="https://www.instagram.com/rieyught"><i class="fa-brands fa-instagram"></i></a>
@@ -88,33 +91,47 @@
   <section class="skills">
   <div class="container">
     <h1 class="sub-title">My Skills</h1>
-    <div class="skills-list">
-      <div>
-        <div class="skill-img">
-        <img src="first.jpg" alt="Skills Image">
-        </div>
-        <h2>PowerPoint Making</h2>
-        <p>PPT making is very crucial for me as a student because most of our activities are reporting. I gained skills in making PowerPoint that is pleasing to the eyes.</p>
-        <a href="#"> Learn More </a>
-      </div>
-      <div>
-         <div class="skill-img">
-        <img src="sec.webp" alt="Skills Image">
-        </div>
-        <h2>Graphic Designing</h2>
-        <p>I love Arts and designing is my passion, so I am confident with my skill regarding Graphic Designing.</p>
-        <a href="#"> Learn More </a>
-      </div>
-      <div>
-       <div class="skill-img">
-        <img src="third.webp" alt="Skills Image">
-        </div>
-        <h2>Painting</h2> 
-        <p>I express my emotions through painting. That is why I have this skill up until now. I want to share this skill with everyone.</p>
-        <a href="#"> Learn More </a>
-      </div>
+<div class="skills-list">
+  <div>
+    <div class="skill-img">
+      <img src="first.jpg" alt="Skills Image">
+    </div>
+    <h2>PowerPoint Making</h2>
+    <p id="skill-text-1" contenteditable="false" style="text-align:justify;">
+      PPT making is very crucial for me as a student because most of our activities are reporting. I gained skills in making PowerPoint that is pleasing to the eyes.
+    </p>
+    <div class="skill-actions">
+      <button id="edit-skill-1" class="btn two">Edit</button>
+      <a href="#">Learn More</a>
     </div>
   </div>
+  <div>
+    <div class="skill-img">
+      <img src="sec.webp" alt="Skills Image">
+    </div>
+    <h2>Graphic Designing</h2>
+    <p id="skill-text-2" contenteditable="false" style="text-align:justify;">
+      I love Arts and designing is my passion, so I am confident with my skill regarding Graphic Designing.
+    </p>
+    <div class="skill-actions">
+      <button id="edit-skill-2" class="btn two">Edit</button>
+      <a href="#">Learn More</a>
+    </div>
+  </div>
+  <div>
+    <div class="skill-img">
+      <img src="third.webp" alt="Skills Image">
+    </div>
+    <h2>Painting</h2> 
+    <p id="skill-text-3" contenteditable="false" style="text-align:justify;">
+      I express my emotions through painting. That is why I have this skill up until now. I want to share this skill with everyone.
+    </p>
+    <div class="skill-actions">
+      <button id="edit-skill-3" class="btn two">Edit</button>
+      <a href="#">Learn More</a>
+    </div>
+  </div>
+</div>
   </section>
 </div>
 
@@ -145,10 +162,81 @@
     </div>
   </div>
   <div class="copyright">
-    <p>Copyright @ Jem. <br>Made with <i class="fa-solid fa-heart"></i> by Jemarie Fernandez</p>
+    <p>Copyright @ Jem. Made with <i class="fa-solid fa-heart"></i> by Jemarie Fernandez</p>
   </div>
 </section>
 </div>
 </div>
+<script>
+  const toggle = document.getElementById("darkmode-toggle");
+  const body = document.body;
+
+  if (localStorage.getItem("darkmode") === "enabled") {
+    body.classList.add("dark-mode");
+    toggle.checked = true;
+  }
+
+  toggle.addEventListener("change", () => {
+    if (toggle.checked) {
+      body.classList.add("dark-mode");
+      localStorage.setItem("darkmode", "enabled");
+    } else {
+      body.classList.remove("dark-mode");
+      localStorage.setItem("darkmode", "disabled");
+    }
+  });
+</script>
+
+<script>
+  const editBtn = document.getElementById("edit-btn");
+  const aboutText = document.getElementById("about-text");
+
+  editBtn.addEventListener("click", () => {
+    if (aboutText.isContentEditable) {
+      // Disable editing
+      aboutText.contentEditable = "false";
+      editBtn.textContent = "Edit";
+
+      // Save changes to localStorage
+      localStorage.setItem("aboutText", aboutText.innerHTML);
+    } else {
+      // Enable editing
+      aboutText.contentEditable = "true";
+      aboutText.focus();
+      editBtn.textContent = "Save";
+    }
+  });
+
+  // Load saved content if available
+  if (localStorage.getItem("aboutText")) {
+    aboutText.innerHTML = localStorage.getItem("aboutText");
+  }
+
+   // Skills edit buttons
+  for (let i = 1; i <= 3; i++) {
+    const skillText = document.getElementById(`skill-text-${i}`);
+    const editSkillBtn = document.getElementById(`edit-skill-${i}`);
+
+    if (skillText && editSkillBtn) {
+      editSkillBtn.addEventListener("click", () => {
+        if (skillText.isContentEditable) {
+          skillText.contentEditable = "false";
+          editSkillBtn.textContent = "Edit";
+          localStorage.setItem(`skillText${i}`, skillText.innerHTML);
+        } else {
+          skillText.contentEditable = "true";
+          editSkillBtn.textContent = "Save";
+          skillText.focus();
+        }
+      });
+
+      // Load saved skill text
+      if (localStorage.getItem(`skillText${i}`)) {
+        skillText.innerHTML = localStorage.getItem(`skillText${i}`);
+      }
+    }
+  }
+</script>
+
 </body>
 </html>
