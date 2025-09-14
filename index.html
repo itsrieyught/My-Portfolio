@@ -15,13 +15,13 @@
 </head>
 
 <body>
-   <div class="toggle-container">
-     <input type="checkbox" id="darkmode-toggle">
-     <label for="darkmode-toggle" class="toggle-label">
-       <span class="moon">🌙</span>
-       <span class="sun">☀️</span>
-     </label>
-   </div>
+   <!-- Toggle button -->
+<div class="toggle-container">
+  <button id="darkmode-btn" class="toggle-btn">
+    <i class="fas fa-moon"></i>
+  </button>
+</div>
+
 
   <nav>
     <div class="logo">
@@ -102,7 +102,7 @@
     </p>
     <div class="skill-actions">
       <button id="edit-skill-1" class="btn two">Edit</button>
-      <a href="#">Learn More</a>
+      <a href="#" class="btn two">Learn More</a>
     </div>
   </div>
   <div>
@@ -115,7 +115,7 @@
     </p>
     <div class="skill-actions">
       <button id="edit-skill-2" class="btn two">Edit</button>
-      <a href="#">Learn More</a>
+       <a href="#" class="btn two">Learn More</a>
     </div>
   </div>
   <div>
@@ -128,7 +128,7 @@
     </p>
     <div class="skill-actions">
       <button id="edit-skill-3" class="btn two">Edit</button>
-      <a href="#">Learn More</a>
+       <a href="#" class="btn two">Learn More</a>
     </div>
   </div>
 </div>
@@ -168,24 +168,31 @@
 </div>
 </div>
 <script>
-  const toggle = document.getElementById("darkmode-toggle");
+  const toggleBtn = document.getElementById("darkmode-btn");
   const body = document.body;
 
+  // Load theme preference on page load
   if (localStorage.getItem("darkmode") === "enabled") {
     body.classList.add("dark-mode");
-    toggle.checked = true;
+    toggleBtn.innerHTML = '<i class="fas fa-sun"></i>';
+  } else {
+    toggleBtn.innerHTML = '<i class="fas fa-moon"></i>';
   }
 
-  toggle.addEventListener("change", () => {
-    if (toggle.checked) {
-      body.classList.add("dark-mode");
+  // Toggle dark mode when button is clicked
+  toggleBtn.addEventListener("click", () => {
+    body.classList.toggle("dark-mode");
+
+    if (body.classList.contains("dark-mode")) {
+      toggleBtn.innerHTML = '<i class="fas fa-sun"></i>';
       localStorage.setItem("darkmode", "enabled");
     } else {
-      body.classList.remove("dark-mode");
+      toggleBtn.innerHTML = '<i class="fas fa-moon"></i>';
       localStorage.setItem("darkmode", "disabled");
     }
   });
 </script>
+
 
 <script>
   const editBtn = document.getElementById("edit-btn");

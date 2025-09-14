@@ -11,19 +11,12 @@
     --bg-color: white;
     --text-color: black;
     --main-color: darkred;
-
     --big-font: 7rem;
     --p-font: 1.1rem;
     --max-width: 1200px;
 }
 
-/* ✅ Dark mode (when toggle is checked) */
-body:has(#darkmode-toggle:checked) {
-    --bg-color: black;
-    --text-color: white;
-}
-
-/* General body styling */
+/* ========== BASE STYLES ========== */
 body {
     margin: 0;
     padding: 0;
@@ -32,64 +25,11 @@ body {
     transition: background 0.3s, color 0.3s;
 }
 
-/* Toggle button container */
-.toggle-container {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    z-index: 1001;
+body.dark-mode {
+    --bg-color: black;
+    --text-color: white;
 }
 
-#darkmode-toggle {
-    display: none;
-}
-
-/* Toggle label */
-.toggle-label {
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: #aaa; /* ✅ fixed invalid color */
-    color: #333;
-    padding: 8px 16px;
-    border-radius: 25px;
-    font-weight: bold;
-    font-size: 1rem;
-    transition: background 0.3s, color 0.3s;
-    user-select: none;
-}
-
-/* Icons inside the toggle */
-.toggle-label .moon {
-    display: inline-block;
-}
-.toggle-label .sun {
-    display: none;
-}
-
-/* Switch moon/sun when checked */
-#darkmode-toggle:checked + .toggle-label .moon {
-    display: none;
-}
-#darkmode-toggle:checked + .toggle-label .sun {
-    display: inline-block;
-}
-
-/* Dark mode toggle style */
-body:has(#darkmode-toggle:checked) .toggle-label {
-    background: #444;
-    color: white;
-}
-
-/* Example: styling your second button differently in dark mode */
-body:has(#darkmode-toggle:checked) .two {
-    background: black;
-    color: white;
-    border: 2px solid var(--main-color);
-}
-
-/* Page wrapper to apply theme */
 .page-wrapper {
     background-color: var(--bg-color);
     color: var(--text-color);
@@ -97,8 +37,12 @@ body:has(#darkmode-toggle:checked) .two {
     min-height: 100vh;
 }
 
+section {
+    padding: 0 15%;
+}
 
-nav{
+/* ========== NAVIGATION ========== */
+nav {
     position: fixed;
     top: 0;
     right: 0;
@@ -112,21 +56,35 @@ nav{
     transition: all ease .45s;
 }
 
-nav .logo a{
+nav .logo a {
     color: var(--text-color);
     font-size: 41px;
     font-weight: 600;
 }
 
-nav .logo span{
+nav .logo span {
     color: var(--main-color);
 }
 
-ul{
+nav .checkbox {
+    display: none;
+}
+
+nav input {
+    display: none;
+}
+
+nav .checkbox i {
+    font-size: 1.5rem;
+    color: var(--text-color);
+    cursor: pointer;
+}
+
+ul {
     display: flex;
 }
 
-ul li a{
+ul li a {
     font-size: var(--p-font);
     font-weight: 500;
     color: var(--text-color);
@@ -134,31 +92,86 @@ ul li a{
     transition: all ease .50s;
 }
 
-ul li a:hover{
-  background-color: var(--main-color);
-  color: white;
+ul li a:hover {
+    background-color: var(--main-color);
+    color: white;
 }
 
-nav .checkbox{
-    display: none;
+/* ========== TOGGLE BUTTON ========== */
+.toggle-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1001;
 }
 
-nav input{
-    display: none;
-}
-
-nav .checkbox i{
-    font-size: 1.5rem;
-    color: var(--text-color);
+.toggle-btn {
     cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #aaa;
+    color: #333;
+    padding: 8px 16px;
+    border-radius: 25px;
+    font-size: 1.2rem;
+    border: none;
+    transition: background 0.3s, color 0.3s;
 }
 
-section{
-    padding: 0 15%;
+body.dark-mode .toggle-btn {
+    background: #444;
+    color: white;
 }
 
-/* --home-- */
-.home{
+/* ========== BUTTONS ========== */
+.btn {
+    display: inline-block;
+    padding: 14px 34px;
+    background: var(--main-color);
+    color: white;
+    border: 2px solid var(--main-color);
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.6s ease-in-out;
+}
+
+.btn:hover {
+    transform: translate(-5px);
+    background: transparent;
+    color: var(--main-color);
+}
+
+.two {
+    background: white;
+    border: 2px solid var(--main-color);
+    color: var(--main-color);
+    margin-left: 25px;
+}
+
+.two:hover {
+    color: white;
+    background: var(--main-color);
+    border: 2px solid var(--main-color);
+}
+
+body.dark-mode .two {
+    background: black;
+    color: white;
+    border: 2px solid var(--main-color);
+}
+
+body.dark-mode .btn:hover,
+body.dark-mode .two:hover {
+    background: #fff;
+    color: var(--main-color);
+    border-color: #fff;
+}
+
+/* ========== HOME SECTION ========== */
+.home {
     position: relative;
     width: 100%;
     height: 100vh;
@@ -168,23 +181,10 @@ section{
     gap: 30px;
 }
 
-.home-img{
-    width: 700px;
-    height: 700px;
-}
-
-.home-img img{
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    animation: imgg 2s ease-in-out infinite;
-    animation-delay: 2s;
-}
-
-@keyframes imgg{
-    0%{ transform: translateY(0); }
-    50%{ transform: translateY(-22px); }
-    100%{ transform: translateY(0); }
+.home-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
 .home-text span {
@@ -199,23 +199,17 @@ section{
     text-transform: uppercase;
 }
 
-.home-text h1{
+.home-text h1 {
     font-size: 50px;
     margin: 20px 0;
 }
 
-.home-text p{
+.home-text p {
     font-size: var(--p-font);
     font-weight: 400;
     color: #666; 
     line-height: 30px;
     margin-bottom: 20px;
-}
-
-.home-text {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
 }
 
 .main-btn {
@@ -224,74 +218,60 @@ section{
     margin-top: 10px;
 }
 
-.btn{
-    display: inline-block;
-    padding: 14px 34px;
-    background: var(--main-color);
-    color: white;
-    border: 2px solid var(--main-color);
-    font-size: 16px;
-    font-weight: 600;
-    border-radius: 8px;
-    transition: all 0.6s ease-in-out;
+.home-img {
+    width: 700px;
+    height: 700px;
 }
 
-.btn:hover{
-    transform: translate(-5px);
-    background: transparent;
-    color: var(--main-color);
+.home-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    animation: imgg 2s ease-in-out infinite;
+    animation-delay: 2s;
 }
 
-.two{
-    background: white;
-    border: 2px solid var(--main-color);
-    color: var(--main-color);
-    margin-left: 25px;
+@keyframes imgg {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-22px); }
+    100% { transform: translateY(0); }
 }
 
-.two:hover{
-    color:white;
-    background: var(--main-color);
-    border: 2px solid var(--main-color);
+/* ========== ABOUT SECTION ========== */
+#about {
+    padding: 88px 0;
+    color: var(--text-color);
 }
 
-
-/* --about-- */
-#about{
-  padding: 88px 0;
-  color: var(--text-color);
+.row {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
 }
 
-.row{
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
+.about-col-1 {
+    flex-basis: 30%;
 }
 
-.about-col-1{
-  flex-basis: 30%;
+.about-col-1 img {
+    width: 150%;
+    border-radius: 10px;
+    margin: 30px 0;
 }
 
-.about-col-1 img{
-  width: 150%;
-  border-radius: 10px;
-  margin: 30px 0;
-}
-
-.about-col-2{
-  flex-basis: 50%;
-  mar
-  gin: 50px 0;
+.about-col-2 {
+    flex-basis: 50%;
+    margin: 50px 0;
 }
 
 .about-col-2 p {
-  margin-bottom: 18px; /* Adjust this value for more or less space */
+    margin-bottom: 18px;
 }
 
-.sub-title{
-  font-size: 60px;
-  font-weight: 600;
-  color: var(--text-color);
+.sub-title {
+    font-size: 60px;
+    font-weight: 600;
+    color: var(--text-color);
 }
 
 .social i {
@@ -304,105 +284,125 @@ section{
     box-shadow: 0px 20px 40px #00000070;
     border: 1px solid #3b3b3b;
     border-radius: 50%;
-    color: white; /* Always white */
+    color: white;
     font-size: 20px;
     margin: 0 7px;
     transition: all 0.6s ease-in-out;
 }
 
-.social i:hover{
+.social i:hover {
     transform: translate(-5px);
 }
 
-/*---skills---*/
-#skills{
-  padding: 88px 0;
+/* ========== SKILLS SECTION ========== */
+#skills {
+    padding: 88px 0;
 }
 
-.skill-img img{
+.skills-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-gap: 60px;
+    margin-top: 50px;
+    padding: 0 20px;
+}
+
+.skills-list > div {
+    background-color: white;
+    padding: 50px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    transition: background 0.5s, transform 0.5s;
+    color: var(--text-color);
+    border: 1px solid #e0e0e0;
+    min-height: 400px;
+}
+
+.skills-list div h2 {
+    font-size: 30px;
+    font-weight: 500;
+    margin-bottom: 15px;
+    color: black;
+}
+
+.skills-list div p {
+    font-size: 15px;
+    font-weight: 400;
+    color: black;
+}
+
+.skills-list div:hover {
+    background: indianred;
+    transform: translateY(-10px);
+    color: white;
+}
+
+.skill-img img {
     width: 100%;
     height: 100%;
     animation: imgg 2s ease-in-out infinite;
     animation-delay: 2s;
+    display: block;
+    border-radius: 8px;
+    background-color: #e0e0e0;
 }
 
-.skills-list{
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  grid-gap: 40px;
-  margin-top: 50px;
+.skill-actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin-top: 12px;
 }
 
-.skills-list div{
-  background: #f5f5f5; /* Light mode */
-  padding: 40px;
-  font-size: 13px;
-  font-weight: 300;
-  border-radius: 10px;
-  transition: background 0.5s, transform 0.5s;
-  color: var(--text-color);
+.skills-list .btn.two {
+    display: block;
+    margin: 12px auto;
+    padding: 6px 18px;
+    font-size: 0.9rem;
+    border-radius: 6px;
+    min-width: unset;
+    width: fit-content;
+    text-align: center;
 }
 
-.skills-list div h2{
-  font-size: 30px;
-  font-weight: 500;
-  margin-bottom: 15px;
-}
-
-.skills-list div p{
-  font-size: 15px;
-  font-weight: 400;
-}
-
-
-/* Style Learn More as a button with black border and center it */
 .skills-list div a {
-  display: inline-block;
-  padding: 8px 22px;
-  border: 2px solid black;
-  border-radius: 6px;
-  background: transparent;
-  color: black;
-  font-size: 1rem;
-  font-weight: 500;
-  text-align: center;
-  margin: 12px auto 0 auto;
-  transition: background 0.3s, color 0.3s, border-color 0.3s;
+    border: 2px solid darkred;
+    background: transparent;
+    color: darkred;
+    font-weight: 500;
+    white-space: nowrap;
+    transition: background 0.3s, color 0.3s, border-color 0.3s;
 }
 
-.skills-list div a:hover {
-  background: black;
-  color: white;
-  border-color: black;
+.skills-list div:hover #edit-btn,
+.skills-list div:hover a {
+    background: #fff;
+    color: darkred;
+    border-color: darkred;
 }
 
-.skills-list div h2,
-.skills-list div p, 
-.skills-list div a{
-    color: black; /* Always black regardless of dark or light mode */
+.skill-actions .btn.two:hover {
+    background: darkred;
+    color: #fff;
+    border-color: darkred;
 }
 
-.skills-list div:hover{
-  background: indianred;
-  transform: translateY(-10px);
-  color: white;
+/* ========== CONTACT SECTION ========== */
+#contact {
+    padding: 88px 0;
 }
 
-/*---contact--*/
-#contact{
-  padding: 88px 0;
+.contact-left {
+    flex-basis: 35%;
 }
 
-.contact-left{
-  flex-basis: 35%;
+.contact-right {
+    flex-basis: 60%;
 }
 
-.contact-right{
-  flex-basis: 60%;
-}
-
-.contact-left p{
-  margin-top: 20px;
+.contact-left p {
+    margin-top: 20px;
 }
 
 .contact-left p i {
@@ -415,7 +415,7 @@ section{
     box-shadow: 0px 20px 40px #00000070;
     border: 1px solid #3b3b3b;
     border-radius: 50%;
-    color: white; /* Force always white */
+    color: white;
     font-size: 20px;
     margin: 0 7px;
     transition: all 0.6s ease-in-out;
@@ -431,33 +431,38 @@ section{
     box-shadow: 0px 20px 40px #00000070;
     border: 1px solid #3b3b3b;
     border-radius: 50%;
-    color: white; /* Always white */
+    color: white;
     font-size: 30px;
     margin: 0 7px;
     transition: all 0.6s ease-in-out;
 }
 
-.social-icons i:hover{
+.social-icons i:hover {
     transform: translate(-5px);
 }
 
-.contact-right form{
-  width: 100%;
+.contact-right form {
+    width: 100%;
 }
 
-form input, form textarea{
-  width: 100%;
-  border: 0;
-  outline: none;
-  background: #f5f5f5;
-  padding: 15px;
-  margin: 15px 0;
-  color: var(--text-color);
-  font-size: 18px;
-  border-radius: 6px;
+form input, form textarea {
+    width: 100%;
+    border: 0;
+    outline: none;
+    background: #e0e0e0;
+    padding: 15px;
+    margin: 15px 0;
+    color: var(--text-color);
+    font-size: 18px;
+    border-radius: 6px;
 }
 
-/* Default light mode */
+.contact input::placeholder,
+.contact textarea::placeholder {
+    color: #555;
+}
+
+/* ========== FOOTER ========== */
 .copyright {
     background: #333; 
     color: white; 
@@ -472,100 +477,158 @@ form input, form textarea{
     color: var(--main-color);
 }
 
-/* Optional: if you want a slightly different background in light mode */
 body:not(:has(#darkmode-toggle:checked)) .copyright {
     background: #747373; 
 }
 
-  [contenteditable="true"] {
-  outline: 2px dashed darkred;
-  background: #f9f9f9;
-  padding: 5px;
+/* ========== EDITABLE CONTENT ========== */
+[contenteditable="true"] {
+    outline: 2px dashed darkred;
+    background: #f9f9f9;
+    padding: 5px;
+}
+
+#about-text[contenteditable="true"] {
+    color: var(--text-color);
+    background: #fff;
+}
+
+[id^="skill-text-"][contenteditable="true"] {
+    color: var(--text-color);
+    background: #fff;
 }
 
 #edit-btn {
-  padding: 6px 18px;
-  font-size: 0.9rem;
-  border-radius: 6px;
-  min-width: unset;
+    padding: 6px 18px;
+    font-size: 0.9rem;
+    border-radius: 6px;
+    min-width: unset;
 }
 
-.skills-list .btn.two {
-  display: block;
-  margin: 12px auto;
-  padding: 6px 18px;
-  font-size: 0.9rem;
-  border-radius: 6px;
-  min-width: unset;
-  width: fit-content;
-  text-align: center;
+/* ========== DARK MODE STYLES ========== */
+body.dark-mode #about-text[contenteditable="true"] {
+    color: #888;
+    background: #fff;
 }
 
-.skill-actions {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 12px;
-  margin-top: 12px;
+body.dark-mode [id^="skill-text-"][contenteditable="true"] {
+    color: #888;
+    background: #fff;
 }
 
-.skill-actions .btn.two,
-.skill-actions a {
-  margin: 0;
-  padding: 4px 12px;
-  font-size: 0.85rem;
-  border-radius: 6px;
-  min-width: unset;
-  width: fit-content;
-  text-align: center;
+body.dark-mode .skills-list > div {
+    background-color: #333;
+    color: #f0f0f0;
 }
 
-/* Style Learn More as a button with black border */
-.skill-actions a {
-  border: 2px solid black;
-  background: transparent;
-  color: black;
-  font-weight: 500;
-  white-space: nowrap;
-  transition: background 0.3s, color 0.3s, border-color 0.3s;
+body.dark-mode .skills-list > div h2,
+body.dark-mode .skills-list > div p {
+    color: #f0f0f0;
 }
 
-.skill-actions a:hover {
-  background: black;
-  color: white;
-  border-color: black;
+body.dark-mode .skills-list .skill-img img {
+    background-color: #333;
 }
 
-/*---responsive---*/
-@media only screen and (max-width: 600px){
-  .sub-title{
-    font-size: 40px;
-  }
-  .about-col-1, .about-col-2{
-    flex-basis: 100%;
-  }
-  .about-col-1{
-   margin-bottom: 30px;
- }
-  .about-col-2{
-    font-size: 14px; 
-  }
-  .contact-left, .contact-right{
-    flex-basis: 100%;
-  }
-  .copyright{
-    font-size: 14px;
-  }
+body.dark-mode .skills-list .skill-actions .btn {
+    background-color: #333;
+    color: #f0f0f0;
+    border: 2px solid #f0f0f0;
+}
 
-  /* Stack buttons on small screens */
-  .main-btn {
-    flex-direction: column;
-    width: 100%;
-  }
-  .main-btn .btn {
-    width: 100%;
-    text-align: center;
-  }
+body.dark-mode .skills-list .skill-actions .btn:hover {
+    background-color: darkred;
+    color: white;
+}
 
+body.dark-mode .contact input,
+body.dark-mode .contact textarea {
+    background-color: #333;
+    color: #f0f0f0;
+    border: 1px solid #555;
+}
 
+body.dark-mode .contact input::placeholder,
+body.dark-mode .contact textarea::placeholder {
+    color: #aaa;
+}
+
+body:has(#darkmode-toggle:checked) form input,
+body:has(#darkmode-toggle:checked) form textarea {
+    background: #444;
+    color: white;
+    border: 1px solid #666;
+}
+
+body:has(#darkmode-toggle:checked) form input::placeholder,
+body:has(#darkmode-toggle:checked) form textarea::placeholder {
+    color: #bbb;
+}
+
+body:has(#darkmode-toggle:checked) .skills-list div {
+    background: #444;
+    color: white;
+}
+
+body:has(#darkmode-toggle:checked) .skills-list div h2,
+body:has(#darkmode-toggle:checked) .skills-list div p {
+    color: white;
+}
+
+body:has(#darkmode-toggle:checked) .skills-list div a,
+body:has(#darkmode-toggle:checked) .skills-list div .btn.two {
+    border: 2px solid white;
+    background: transparent;
+    color: white;
+}
+
+body:has(#darkmode-toggle:checked) .skills-list div a:hover,
+body:has(#darkmode-toggle:checked) .skills-list div .btn.two:hover {
+    background: white;
+    color: darkred;
+    border-color: white;
+}
+
+body:has(#darkmode-toggle:checked) .skills-list div [contenteditable="true"] {
+    color: #444;
+    background: #fff;
+    outline: 2px dashed darkred;
+    padding: 5px;
+}
+
+/* ========== RESPONSIVE DESIGN ========== */
+@media only screen and (max-width: 600px) {
+    .sub-title {
+        font-size: 40px;
+    }
+    
+    .about-col-1, .about-col-2 {
+        flex-basis: 100%;
+    }
+    
+    .about-col-1 {
+        margin-bottom: 30px;
+    }
+    
+    .about-col-2 {
+        font-size: 14px; 
+    }
+    
+    .contact-left, .contact-right {
+        flex-basis: 100%;
+    }
+    
+    .copyright {
+        font-size: 14px;
+    }
+
+    .main-btn {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .main-btn .btn {
+        width: 100%;
+        text-align: center;
+    }
 }
