@@ -4,10 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio Website</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
@@ -18,6 +15,11 @@
         <button id="darkmode-btn" class="toggle-btn">
             <i class="fas fa-moon"></i>
         </button>
+    </div>
+
+    <!-- Notification -->
+    <div id="notification" class="notification">
+        <span id="notification-text"></span>
     </div>
 
     <!-- Navigation -->
@@ -47,8 +49,8 @@
                     <p>Bachelor of Science in Computer Science | 3rd Year</p>
 
                     <div class="main-btn">
-                        <a href="#" class="btn">Hire Me</a>
-                        <a href="#" class="btn two">Message Me</a>
+                        <a href="#contact" class="btn">Hire Me</a>
+                        <a href="#contact" class="btn two">Message Me</a>
                     </div>
                 </div>
 
@@ -68,8 +70,8 @@
                     <div class="about-col-2">
                         <h1 class="sub-title">About Me</h1>
                         <p id="about-text" contenteditable="false" style="text-align: justify;">
-                            Hi! I'm Jemarie Fernandez. I graduated with high honors from Senior High School at Bayugan National Comprehensive High School. I am currently a third-year college student pursuing a Bachelor of Science in Computer Science at Caraga State University – Main Campus in Ampayon, Butuan City. 
-                            I enjoy playing sports, watching K-Dramas, and listening to music. I don't particularly like studying, but I've managed to keep going until this year. xD
+                            Hi! I’m Jemarie Fernandez, a third-year college student pursuing a Bachelor of Science in Computer Science at Caraga State University – Main Campus in Ampayon, Butuan City. I graduated with high honors from Senior High School at Bayugan National Comprehensive High School, and I’ve always been passionate about technology and problem-solving.
+                            <br><br>I have skills in coding, website development, and software development, and I’m experienced with HTML, CSS, JavaScript, Python, and other programming tools. I enjoy creating dynamic web applications, building user-friendly interfaces, and developing efficient software solutions, and I’m always eager to learn and apply new technologies to real-world projects.
                         </p>
                         <p><button id="edit-btn" class="btn two">Edit</button></p>
                         <p>Check out my:</p><br>
@@ -92,7 +94,7 @@
                     <div class="skills-list">
                         <div>
                             <div class="skill-img">
-                                <img src="first.jpg" alt="Skills Image">
+                                <img src="first.jpg" alt="PowerPoint Making">
                             </div>
                             <h2>PowerPoint Making</h2>
                             <p id="skill-text-1" contenteditable="false" style="text-align:justify;">
@@ -105,7 +107,7 @@
                         </div>
                         <div>
                             <div class="skill-img">
-                                <img src="sec.webp" alt="Skills Image">
+                                <img src="sec.webp" alt="Graphic Designing">
                             </div>
                             <h2>Graphic Designing</h2>
                             <p id="skill-text-2" contenteditable="false" style="text-align:justify;">
@@ -118,7 +120,7 @@
                         </div>
                         <div>
                             <div class="skill-img">
-                                <img src="third.webp" alt="Skills Image">
+                                <img src="third.webp" alt="Painting">
                             </div>
                             <h2>Painting</h2> 
                             <p id="skill-text-3" contenteditable="false" style="text-align:justify;">
@@ -151,11 +153,12 @@
                             </div>
                         </div>
                         <div class="contact-right">
-                            <form>
+                            <form id="contact-form">
                                 <input type="text" name="Name" placeholder="Your Name" required>
                                 <input type="email" name="email" placeholder="Your Email" required>
-                                <textarea name="Message" rows="6" placeholder="Your Message"></textarea>
+                                <textarea name="Message" rows="6" placeholder="Your Message" required></textarea>
                                 <button type="submit" class="btn">Submit</button>
+                                <button type="button" id="clear-form-btn" class="btn two">Clear Form</button>
                             </form>
                         </div>
                     </div>
@@ -167,82 +170,138 @@
         </div>
     </div>
 
-    <!-- JavaScript -->
     <script>
-        const toggleBtn = document.getElementById("darkmode-btn");
+        // DOM Elements
+        const darkModeBtn = document.getElementById('darkmode-btn');
         const body = document.body;
+        const notification = document.getElementById('notification');
+        const notificationText = document.getElementById('notification-text');
+        const aboutText = document.getElementById('about-text');
+        const editAboutBtn = document.getElementById('edit-btn');
+        const contactForm = document.getElementById('contact-form');
+        const clearFormBtn = document.getElementById('clear-form-btn');
 
-        // Load theme preference on page load
-        if (localStorage.getItem("darkmode") === "enabled") {
-            body.classList.add("dark-mode");
-            toggleBtn.innerHTML = '<i class="fas fa-sun"></i>';
-        } else {
-            toggleBtn.innerHTML = '<i class="fas fa-moon"></i>';
+        // Utility Functions
+        function showNotification(message, type = 'success') {
+            notificationText.textContent = message;
+            notification.className = `notification ${type} show`;
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
         }
 
-        // Toggle dark mode when button is clicked
-        toggleBtn.addEventListener("click", () => {
-            body.classList.toggle("dark-mode");
+        // Dark Mode Toggle
+        function toggleDarkMode() {
+            body.classList.toggle('dark-mode');
+            const isDarkMode = body.classList.contains('dark-mode');
+            darkModeBtn.innerHTML = isDarkMode ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+            showNotification(isDarkMode ? 'Dark mode enabled' : 'Light mode enabled');
+        }
 
-            if (body.classList.contains("dark-mode")) {
-                toggleBtn.innerHTML = '<i class="fas fa-sun"></i>';
-                localStorage.setItem("darkmode", "enabled");
+        darkModeBtn.addEventListener('click', toggleDarkMode);
+
+        // Edit About Section
+        function toggleAboutEdit() {
+            const isEditing = aboutText.contentEditable === 'true';
+            
+            if (isEditing) {
+                aboutText.contentEditable = 'false';
+                editAboutBtn.textContent = 'Edit';
+                showNotification('About section saved!');
             } else {
-                toggleBtn.innerHTML = '<i class="fas fa-moon"></i>';
-                localStorage.setItem("darkmode", "disabled");
-            }
-        });
-    </script>
-
-    <script>
-        const editBtn = document.getElementById("edit-btn");
-        const aboutText = document.getElementById("about-text");
-
-        editBtn.addEventListener("click", () => {
-            if (aboutText.isContentEditable) {
-                // Disable editing
-                aboutText.contentEditable = "false";
-                editBtn.textContent = "Edit";
-
-                // Save changes to localStorage
-                localStorage.setItem("aboutText", aboutText.innerHTML);
-            } else {
-                // Enable editing
-                aboutText.contentEditable = "true";
+                aboutText.contentEditable = 'true';
                 aboutText.focus();
-                editBtn.textContent = "Save";
+                editAboutBtn.textContent = 'Save';
+                showNotification('Edit mode enabled');
             }
-        });
-
-        // Load saved content if available
-        if (localStorage.getItem("aboutText")) {
-            aboutText.innerHTML = localStorage.getItem("aboutText");
         }
 
-        // Skills edit buttons
+        editAboutBtn.addEventListener('click', toggleAboutEdit);
+
+        // Skills Edit Functionality
         for (let i = 1; i <= 3; i++) {
             const skillText = document.getElementById(`skill-text-${i}`);
             const editSkillBtn = document.getElementById(`edit-skill-${i}`);
 
             if (skillText && editSkillBtn) {
-                editSkillBtn.addEventListener("click", () => {
-                    if (skillText.isContentEditable) {
-                        skillText.contentEditable = "false";
-                        editSkillBtn.textContent = "Edit";
-                        localStorage.setItem(`skillText${i}`, skillText.innerHTML);
+                editSkillBtn.addEventListener('click', () => {
+                    const isEditing = skillText.contentEditable === 'true';
+                    
+                    if (isEditing) {
+                        skillText.contentEditable = 'false';
+                        editSkillBtn.textContent = 'Edit';
+                        showNotification(`Skill ${i} saved!`);
                     } else {
-                        skillText.contentEditable = "true";
-                        editSkillBtn.textContent = "Save";
+                        skillText.contentEditable = 'true';
+                        editSkillBtn.textContent = 'Save';
                         skillText.focus();
+                        showNotification('Edit mode enabled');
                     }
                 });
-
-                // Load saved skill text
-                if (localStorage.getItem(`skillText${i}`)) {
-                    skillText.innerHTML = localStorage.getItem(`skillText${i}`);
-                }
             }
         }
+
+        // Contact Form Handling
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(contactForm);
+            const name = formData.get('Name');
+            const email = formData.get('email');
+            const message = formData.get('Message');
+            
+            if (name && email && message) {
+                showNotification('Message sent successfully! Thank you for contacting me.');
+                contactForm.reset();
+            } else {
+                showNotification('Please fill in all fields', 'error');
+            }
+        });
+
+        // Clear Form Button
+        clearFormBtn.addEventListener('click', function() {
+            contactForm.reset();
+            showNotification('Form cleared!');
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('nav ul li a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Navigation highlighting on scroll
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('nav ul li a');
+            
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (pageYOffset >= (sectionTop - 200)) {
+                    current = section.getAttribute('class');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').includes(current)) {
+                    link.classList.add('active');
+                }
+            });
+        });
     </script>
 </body>
 </html>
